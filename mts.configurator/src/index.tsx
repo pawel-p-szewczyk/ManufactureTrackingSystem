@@ -1,8 +1,10 @@
+import {createBrowserHistory} from 'history';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
 import { Store } from 'redux';
-import GenealogyWindow from './components/GenealogyWindow';
+import App from './components/App';
 import configureStore from './configureStore';
 import registerServiceWorker from './registerServiceWorker';
 import { IApplicationState } from './store';
@@ -25,8 +27,10 @@ const store: Store<IApplicationState> = configureStore(initialState);
 
 ReactDOM.render(
   <Provider store={store}>
-        <GenealogyWindow />
-      </Provider>,
+    <Router history={createBrowserHistory()}>
+      <App/>
+    </Router>
+  </Provider>,
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
